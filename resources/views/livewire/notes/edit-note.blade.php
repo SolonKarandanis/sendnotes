@@ -26,7 +26,22 @@ new #[Layout('layouts.app')] class extends Component {
 
     public function saveNote()
     {
-        
+        $validated = $this->validate([
+            'noteTitle' => ['required', 'string', 'min:5'],
+            'noteBody' => ['required', 'string', 'min:20'],
+            'noteRecipient' => ['required', 'email'],
+            'noteSendDate' => ['required', 'date'],
+        ]);
+
+        $this->note->update([
+            'title' => $this->noteTitle,
+            'body' => $this->noteBody,
+            'recipient' => $this->noteRecipient,
+            'send_date' => $this->noteSendDate,
+            'is_published' => $this->noteIsPublished,
+        ]);
+
+        $this->dispatch('note-saved');
     }
 
 }; ?>
