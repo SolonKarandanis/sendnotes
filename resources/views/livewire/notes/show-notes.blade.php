@@ -49,7 +49,14 @@ new class extends Component {
             <x-button primary icon-right="plus" class="mt-6" href="{{ route('notes.create') }}" wire:navigate>
                 Create note
             </x-button>
-            <div class="grid gap-4 mt-12 grid-col-2">
+            <div class="grid gap-4 mt-12 grid-col-2" wire:ignore x-data="{
+                notes: @js($notes),
+                selectedNote:null,
+                selectNote(note){
+                    selectedNote=note
+                    
+                }
+            }">
                 @foreach ($notes as $note)
                     <x-card wire:key='{{$note->id}}'>
                         <div class="flex justify-between">
@@ -74,7 +81,7 @@ new class extends Component {
                                 <x-button.circle 
                                     icon="trash" 
                                     wire:click="delete('{{ $note->id }}')" 
-                                    wire:confirm='Are you sure you want to delete this note?'/>
+                                    wire:loading.remove/>
                             </div>
                         </div>
                     </x-card>
