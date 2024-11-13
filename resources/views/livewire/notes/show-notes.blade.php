@@ -54,9 +54,20 @@ new class extends Component {
                 selectedNote:null,
                 selectNote(note){
                     selectedNote=note
-                    
+                    console.log(selectedNote)
                 }
             }">
+                <template x-for="note in notes" :key="note.id">
+                    <x-card >
+                        <div class="flex justify-between">
+                            
+                            
+                        </div>
+                        <button type="button" x-on:click="selectNote(note)">
+                            Select note
+                        </button>
+                    </x-card>
+                </template>
                 @foreach ($notes as $note)
                     <x-card wire:key='{{$note->id}}'>
                         <div class="flex justify-between">
