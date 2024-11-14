@@ -60,7 +60,7 @@ new class extends Component {
                 <template x-for="note in notes" :key="note.id">
                     <x-card >
                         <div class="flex justify-between">
-                            
+                            <h1 x-text="note.title"></h1>
                             
                         </div>
                         <button type="button" x-on:click="selectNote(note)">
